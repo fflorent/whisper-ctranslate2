@@ -8,7 +8,7 @@ class WordsToSegment():
         
     def _get_words(self):
         while len(self.pending_words) > 0:
-            yield self.pending_words.pop(0), True
+            yield self.pending_words.pop(0)
             
     def get_segments(self, segments):
         for segment in segments:
@@ -33,7 +33,7 @@ class WordsToSegment():
         start = None
         end = None
         segment_words = []
-        for word, pending in self._get_words():
+        for word in self._get_words():
 #            print(f"{counter} - {word} - {pending}")
             text += word.word
             end = word.end            
