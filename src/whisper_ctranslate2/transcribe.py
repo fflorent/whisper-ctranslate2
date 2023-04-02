@@ -124,9 +124,11 @@ class Transcribe:
             total=info.duration, unit="seconds", disable=verbose is not False
         ) as pbar:
             wordsToSegment = WordsToSegment()
-            for segment in segments:
+            for segment in wordsToSegment.get_segments(segments):
+            
+ #           for segment in segments:
                 #print("Hola!")           
-                segment = wordsToSegment.get_segment(segment.words)
+#                segment = wordsToSegment.get_segment(segment.words)
 #                print(segment)
 #                return
                 
