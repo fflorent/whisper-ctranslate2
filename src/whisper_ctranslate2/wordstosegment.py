@@ -4,7 +4,7 @@ class WordsToSegment():
 
     def __init__(self):
         self.pending_words = []
-        
+        self.max_words = 5
         
     def _get_words(self):
         while len(self.pending_words) > 0:
@@ -15,14 +15,14 @@ class WordsToSegment():
             yield self.get_segment(segment.words)
 
         pending = len(self.pending_words) 
-        groups = (int)(pending / 5)
+        groups = (int)(pending / self.max_words)
         for group in range(groups):
             idx = 5 * group
-            yield self.get_segment(self.pending_words[idx : idx + 5], False)
+            yield self.get_segment(self.pending_words[idx : idx + self.max_words], False)
 
-        left = pending - (groups * 5)
+        left = pending - (groups * self.max_words)
         if left > 0:
-            yield self.get_segment(segment.words[groups * 5:]    , False)
+            yield self.get_segment(segment.words[groups * self.max_words:], False)
 
     def get_segment(self, words, save = True):
         if save:
@@ -43,8 +43,7 @@ class WordsToSegment():
                 
             counter += 1
             
-            if counter >= 5:
+            if counter >= self.max_words:
                 break
-            
             
         return Segment(start, end, text, segment_words)
