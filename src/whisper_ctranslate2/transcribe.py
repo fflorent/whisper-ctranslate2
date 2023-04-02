@@ -4,6 +4,7 @@ import tqdm
 import sys
 from faster_whisper import WhisperModel
 from .languages import LANGUAGES
+from .wordstosegment import WordsToSegment
 
 system_encoding = sys.getdefaultencoding()
 
@@ -122,7 +123,13 @@ class Transcribe:
         with tqdm.tqdm(
             total=info.duration, unit="seconds", disable=verbose is not False
         ) as pbar:
+            wordsToSegment = WordsToSegment()
             for segment in segments:
+                #print("Hola!")           
+                segment = wordsToSegment.get_segment(segment.words)
+#                print(segment)
+#                return
+                
                 if verbose:
                     start, end, text = segment.start, segment.end, segment.text
 
@@ -138,6 +145,8 @@ class Transcribe:
                 segment_dict = segment._asdict()
                 if segment.words:
                     segment_dict["words"] = [word._asdict() for word in segment.words]
+#                    for word in segment.words:
+                 #       print(word._asdict())
 
                 list_segments.append(segment_dict)
                 duration = segment.end - last_pos
