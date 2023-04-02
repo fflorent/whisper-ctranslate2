@@ -12,19 +12,19 @@ class WordsToSegment():
             
     def get_segments(self, segments):
         for segment in segments:
-            yield self.get_segment(segment.words)
+            yield self._get_segment(segment.words)
 
         pending = len(self.pending_words) 
         groups = (int)(pending / self.max_words)
         for group in range(groups):
             idx = 5 * group
-            yield self.get_segment(self.pending_words[idx : idx + self.max_words], False)
+            yield self._get_segment(self.pending_words[idx : idx + self.max_words], False)
 
         left = pending - (groups * self.max_words)
         if left > 0:
-            yield self.get_segment(segment.words[groups * self.max_words:], False)
+            yield self._get_segment(segment.words[groups * self.max_words:], False)
 
-    def get_segment(self, words, save = True):
+    def _get_segment(self, words, save = True):
         if save:
             self.pending_words += words
 
