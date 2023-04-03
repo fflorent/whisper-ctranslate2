@@ -141,8 +141,10 @@ class Transcribe:
                     print(make_safe(line))
 
                 segment_dict = segment._asdict()
-                if segment.words:
+                if options.word_timestamps and segment.words:
                     segment_dict["words"] = [word._asdict() for word in segment.words]
+                else:
+                    segment_dict["words"] = None
 
                 list_segments.append(segment_dict)
                 duration = segment.end - last_pos
