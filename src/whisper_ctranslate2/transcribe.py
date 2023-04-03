@@ -39,6 +39,7 @@ class TranscriptionOptions(NamedTuple):
     print_colors: bool
     prepend_punctuations: str
     append_punctuations: str
+    max_words: int
 
 
 class Transcribe:

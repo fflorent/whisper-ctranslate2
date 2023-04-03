@@ -222,6 +222,13 @@ def read_command_line():
         default=False,
         help="Print the transcribed text using an experimental color coding strategy to highlight words with high or low confidence",
     )
+    
+    parser.add_argument(
+        "--max_words",
+        type=int,
+        default-1,
+        help="Maximum number of words per line. -1 uses the models' default prediction",
+    )
 
     return parser.parse_args().__dict__
 
@@ -279,6 +286,7 @@ def main():
         prepend_punctuations=args.pop("prepend_punctuations"),
         append_punctuations=args.pop("append_punctuations"),
         print_colors=args.pop("print_colors"),
+        max_words=args.pop("max_words")
     )
 
     if verbose:
