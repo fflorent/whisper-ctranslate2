@@ -226,7 +226,7 @@ def read_command_line():
     parser.add_argument(
         "--max_words",
         type=int,
-        default-1,
+        default=-1,
         help="Maximum number of words per line. -1 uses the models' default prediction",
     )
 

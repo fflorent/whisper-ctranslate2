@@ -91,6 +91,8 @@ class Transcribe:
             cpu_threads=threads,
         )
 
+        word_timestamps_needed = options.print_colors or options.max_words != -1
+
         segments, info = model.transcribe(
             audio=audio,
             language=language,
@@ -106,7 +108,7 @@ class Transcribe:
             condition_on_previous_text=options.condition_on_previous_text,
             initial_prompt=options.initial_prompt,
             suppress_tokens=options.suppress_tokens,
-            word_timestamps=True if options.print_colors else options.word_timestamps,
+            word_timestamps=True if word_timestamps_needed else options.word_timestamps,
             prepend_punctuations=options.prepend_punctuations,
             append_punctuations=options.append_punctuations,
         )
@@ -124,8 +126,7 @@ class Transcribe:
         with tqdm.tqdm(
             total=info.duration, unit="seconds", disable=verbose is not False
         ) as pbar:
-            wordsToSegment = WordsToSegment()
-            for segment in wordsToSegment.get_segments(segments):
+            for segment in WordsToSegment().get_segments(segments) if options.max_words != -1 else segments:
             
                 if verbose:
                     start, end, text = segment.start, segment.end, segment.text
