@@ -37,6 +37,7 @@ setup(
         "dev": [
             "flake8==6.*",
             "black==23.*",
+            "nose2",
         ],
     },
     entry_points={
