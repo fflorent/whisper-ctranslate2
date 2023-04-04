@@ -40,6 +40,8 @@ class TranscriptionOptions(NamedTuple):
     prepend_punctuations: str
     append_punctuations: str
     max_words: int
+    vad_filter: bool
+    vad_min_silence_duration_ms: Optional[int]
 
 
 class Transcribe:
@@ -111,6 +113,10 @@ class Transcribe:
             word_timestamps=True if word_timestamps_needed else options.word_timestamps,
             prepend_punctuations=options.prepend_punctuations,
             append_punctuations=options.append_punctuations,
+            vad_filter=options.vad_filter,
+            vad_parameters={
+                "min_silence_duration_ms": options.vad_min_silence_duration_ms
+            },
         )
 
         language_name = LANGUAGES[info.language].title()
