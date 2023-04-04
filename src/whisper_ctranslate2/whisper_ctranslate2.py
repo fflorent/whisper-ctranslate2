@@ -236,7 +236,7 @@ def read_command_line():
         default=False,
         help="Print the transcribed text using an experimental color coding strategy to highlight words with high or low confidence",
     )
-    
+
     parser.add_argument(
         "--max_words",
         type=int,
@@ -300,7 +300,7 @@ def main():
         prepend_punctuations=args.pop("prepend_punctuations"),
         append_punctuations=args.pop("append_punctuations"),
         print_colors=args.pop("print_colors"),
-        max_words=args.pop("max_words")
+        max_words=args.pop("max_words"),
         vad_filter=args.pop("vad_filter"),
         vad_min_silence_duration_ms=args.pop("vad_min_silence_duration_ms"),
     )
