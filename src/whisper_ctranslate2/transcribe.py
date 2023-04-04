@@ -130,8 +130,11 @@ class Transcribe:
         with tqdm.tqdm(
             total=info.duration, unit="seconds", disable=verbose is not False
         ) as pbar:
-            for segment in WordsToSegment().get_segments(segments) if options.max_words != -1 else segments:
-            
+            for segment in (
+                WordsToSegment().get_segments(segments)
+                if options.max_words != -1
+                else segments
+            ):
                 if verbose:
                     start, end, text = segment.start, segment.end, segment.text
 
