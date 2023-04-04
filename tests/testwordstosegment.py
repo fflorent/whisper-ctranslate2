@@ -5,6 +5,7 @@ import unittest
 class TestWordsToSegment(unittest.TestCase):
     def test_info_languages(self):
         w = WordsToSegment()
+        w = w
         self.assertEquals(1, 1)
 
 
