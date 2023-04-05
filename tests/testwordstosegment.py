@@ -4,17 +4,21 @@ import unittest
 
 
 class TestWordsToSegment(unittest.TestCase):
-    def test_one_segment(self):
-        MAX_WORDS = 5
-        words = []
+    def _get_test_segment(self, num_words):
         text = ""
-        for i in range(5):
+        words = []
+
+        for i in range(num_words):
             word = f"word-{i} "
             text += word
             w = Word(10 + i, 20 + i, word, 1)
             words.append(w)
 
-        segment = Segment(5, 30, text, words, 1, 1)
+        return Segment(5, 30, text, words, 1, 1)
+
+    def test_one_segment(self):
+        MAX_WORDS = 5
+        segment = self._get_test_segment(5)
 
         new_segments = WordsToSegment(MAX_WORDS).get_segments([segment])
         new_segments = list(new_segments)
@@ -25,15 +29,7 @@ class TestWordsToSegment(unittest.TestCase):
 
     def test_two_segments(self):
         MAX_WORDS = 3
-        words = []
-        text = ""
-        for i in range(7):
-            word = f"word-{i} "
-            text += word
-            w = Word(10 + i, 20 + i, word, 1)
-            words.append(w)
-
-        segment = Segment(5, 30, text, words, 1, 1)
+        segment = self._get_test_segment(7)
 
         new_segments = WordsToSegment(MAX_WORDS).get_segments([segment])
         new_segments = list(new_segments)
