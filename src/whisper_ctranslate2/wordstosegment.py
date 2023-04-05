@@ -40,4 +40,4 @@ class WordsToSegment:
             if counter >= self.max_words:
                 break
 
-        return Segment(start, end, text, segment_words)
+        return Segment(start, end, text, segment_words, 0, 0)
