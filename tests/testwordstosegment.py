@@ -5,6 +5,7 @@ import unittest
 
 class TestWordsToSegment(unittest.TestCase):
     def test_check_one_line(self):
+        MAX_WORDS = 5
         words = []
         text = ""
         for i in range(5):
@@ -15,12 +16,12 @@ class TestWordsToSegment(unittest.TestCase):
 
         segment = Segment(5, 30, text, words, 1, 1)
 
-        new_segments = WordsToSegment().get_segments([segment])
+        new_segments = WordsToSegment(MAX_WORDS).get_segments([segment])
         new_segments = list(new_segments)
         self.assertEquals(1, len(new_segments))
         self.assertEquals(10, new_segments[0].start)
         self.assertEquals(24, new_segments[0].end)
-        self.assertEquals("word-0 word-1 word-2 word-3 word-4", new_segments[0].text)
+        self.assertEquals("word-0 word-1 word-2 word-3 word-4 ", new_segments[0].text)
 
 
 if __name__ == "__main__":

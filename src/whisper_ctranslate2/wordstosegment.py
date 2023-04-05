@@ -2,9 +2,9 @@ from faster_whisper.transcribe import Segment
 
 
 class WordsToSegment:
-    def __init__(self):
+    def __init__(self, max_words):
         self.pending_words = []
-        self.max_words = 5
+        self.max_words = max_words
 
     def _get_words(self):
         while len(self.pending_words) > 0:

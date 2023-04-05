@@ -131,7 +131,7 @@ class Transcribe:
             total=info.duration, unit="seconds", disable=verbose is not False
         ) as pbar:
             for segment in (
-                WordsToSegment().get_segments(segments)
+                WordsToSegment(options.max_words).get_segments(segments)
                 if options.max_words != -1
                 else segments
             ):
