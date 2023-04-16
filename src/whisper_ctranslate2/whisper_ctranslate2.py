@@ -11,6 +11,19 @@ from .version import __version__
 from .live import Live
 import sys
 
+MODEL_NAMES = [
+    "tiny",
+    "tiny.en",
+    "base",
+    "base.en",
+    "small",
+    "small.en",
+    "medium",
+    "medium.en",
+    "large-v1",
+    "large-v2",
+]
+
 
 def optional_int(string):
     return None if string == "None" else int(string)
@@ -38,7 +51,7 @@ def read_command_line():
     parser.add_argument(
         "--model",
         default="small",
-        choices=Models().get_list(),
+        choices=MODEL_NAMES,
         help="name of the Whisper model to use",
     )
     parser.add_argument(
@@ -366,7 +379,7 @@ def main():
             raise RuntimeError(f"Model file '{model_filename}' does not exists")
         model_dir = model_directory
     else:
-        model_dir = Models(cache_directory).get_model_dir(model)
+        model_dir = model
 
     if live_transcribe:
         Live(
