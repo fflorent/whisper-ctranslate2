@@ -1,7 +1,6 @@
 import argparse
 import os
 from .transcribe import Transcribe, TranscriptionOptions
-from .models import Models
 from .languages import LANGUAGES, TO_LANGUAGE_CODE, from_language_to_iso_code
 import numpy as np
 import warnings
@@ -308,7 +307,7 @@ def main():
     compute_type: str = args.pop("compute_type")
     verbose: bool = args.pop("verbose")
     model_directory: str = args.pop("model_directory")
-    cache_directory: str = args.pop("model_dir")
+#    cache_directory: str = args.pop("model_dir")
     device_index: Union[int, List[int]] = args.pop("device_index")
     suppress_tokens: str = args.pop("suppress_tokens")
     live_transcribe: bool = args.pop("live_transcribe")
