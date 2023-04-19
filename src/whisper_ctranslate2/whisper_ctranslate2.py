@@ -372,6 +372,7 @@ def main():
             "Print colors requires word-level time stamps. Generated files in output directory will have word-level timestamps"
         )
 
+    output_dir = os.path.abspath(output_dir)
     if model_directory:
         model_filename = os.path.join(model_directory, "model.bin")
         if not os.path.exists(model_filename):
@@ -415,6 +416,9 @@ def main():
         )
         writer = get_writer(output_format, output_dir)
         writer(result, audio_path)
+
+    if verbose:
+        print(f"Transcription results written to '{output_dir}' directory")
 
 
 if __name__ == "__main__":
