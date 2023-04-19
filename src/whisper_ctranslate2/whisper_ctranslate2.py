@@ -307,7 +307,7 @@ def main():
     compute_type: str = args.pop("compute_type")
     verbose: bool = args.pop("verbose")
     model_directory: str = args.pop("model_directory")
-#    cache_directory: str = args.pop("model_dir")
+    cache_directory: str = args.pop("model_dir")
     device_index: Union[int, List[int]] = args.pop("device_index")
     suppress_tokens: str = args.pop("suppress_tokens")
     live_transcribe: bool = args.pop("live_transcribe")
@@ -384,6 +384,7 @@ def main():
     if live_transcribe:
         Live(
             model_dir,
+            cache_directory,
             task,
             language,
             threads,
@@ -404,6 +405,7 @@ def main():
         result = Transcribe().inference(
             audio_path,
             model_dir,
+            cache_directory,
             task,
             language,
             threads,

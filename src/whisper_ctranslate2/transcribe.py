@@ -99,6 +99,7 @@ class Transcribe:
         self,
         audio: Union[str, BinaryIO, np.ndarray],
         model_path: str,
+        cache_directory: str,
         task: str,
         language: str,
         threads: int,
