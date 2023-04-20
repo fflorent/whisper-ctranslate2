@@ -33,12 +33,6 @@ setup(
     ],
     packages=["src/whisper_ctranslate2"],
     include_package_data=True,
-    install_requires=[
-        str(r)
-        for r in pkg_resources.parse_requirements(
-            open(os.path.join(os.path.dirname(__file__), "requirements.txt"))
-        )
-    ],
     extras_require={
         "dev": ["flake8==6.*", "black==23.*", "nose2"],
     },

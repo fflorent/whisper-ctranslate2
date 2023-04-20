@@ -120,7 +120,7 @@ class Transcribe:
 
         print(f"model_path '{model_path}'")
         print(f"cache_directory '{cache_directory}'")
-
+        print(local_files_only)
         model = WhisperModel(
             model_path,
             device=device,

@@ -245,7 +245,6 @@ def read_command_line():
     # CTranslate2 specific parameters
     parser.add_argument(
         "--local_files_only",
-        nargs="*",
         type=str2bool,
         default=False,
         help="Use models in cache without connecting to Internet to check if there are newer versions",
