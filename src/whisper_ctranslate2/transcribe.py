@@ -2,11 +2,11 @@ from .writers import format_timestamp
 from typing import NamedTuple, Optional, List, Union
 import tqdm
 import sys
-from faster_whisper import WhisperModel
+from faster_whisper import WhisperModel, download_model
 from .languages import LANGUAGES
 from typing import BinaryIO
 import numpy as np
-
+import os
 
 system_encoding = sys.getdefaultencoding()
 
@@ -100,6 +100,7 @@ class Transcribe:
         audio: Union[str, BinaryIO, np.ndarray],
         model_path: str,
         cache_directory: str,
+        local_files_only: bool,
         task: str,
         language: str,
         threads: int,
@@ -110,12 +111,24 @@ class Transcribe:
         live: bool,
         options: TranscriptionOptions,
     ):
+        if cache_directory and not os.path.exists(
+            os.path.join(model_path, "model.bin")
+        ):
+            print("Specify cache path")
+            cache_directory = os.path.join(cache_directory, model_path)
+            model_path = download_model(model_path, output_dir=cache_directory)
+
+        print(f"model_path '{model_path}'")
+        print(f"cache_directory '{cache_directory}'")
+
         model = WhisperModel(
             model_path,
             device=device,
             device_index=device_index,
             compute_type=compute_type,
             cpu_threads=threads,
+            download_root=cache_directory,
+            local_files_only=local_files_only,
         )
 
         vad_parameters = self._get_vad_parameters_dictionary(options)

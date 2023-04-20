@@ -244,6 +244,14 @@ def read_command_line():
 
     # CTranslate2 specific parameters
     parser.add_argument(
+        "--local_files_only",
+        nargs="*",
+        type=str2bool,
+        default=False,
+        help="Use models in cache without connecting to Internet to check if there are newer versions",
+    )
+
+    parser.add_argument(
         "--device_index",
         nargs="*",
         type=int,
@@ -312,6 +320,7 @@ def main():
     suppress_tokens: str = args.pop("suppress_tokens")
     live_transcribe: bool = args.pop("live_transcribe")
     audio: str = args.pop("audio")
+    local_files_only: bool = args.pop("local_files_only")
 
     temperature = args.pop("temperature")
     if (increment := args.pop("temperature_increment_on_fallback")) is not None:
@@ -406,6 +415,7 @@ def main():
             audio_path,
             model_dir,
             cache_directory,
+            local_files_only,
             task,
             language,
             threads,
